@@ -1,0 +1,118 @@
+services:
+  kafkaServer:
+    image: bitnami/kafka:3.9.0
+    hostname: kafkaServer
+    container_name: kafkaServer
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_CFG_NODE_ID: 0
+      KAFKA_CFG_PROCESS_ROLES: controller,broker
+      KAFKA_CFG_LISTENERS: PLAINTEXT://kafkaServer:9092,CONTROLLER://kafkaServer:9093
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 0@kafkaServer:9093
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+    volumes:
+      - kafka_data:/bitnami/kafka
+
+  topics:
+    image: bitnami/kafka:3.9.0
+    command: >
+      bash -c "
+      kafka-topics.sh --create --if-not-exists --topic songRequests --bootstrap-server kafkaServer:9092  --config retention.ms=-1
+      && kafka-topics.sh --create --if-not-exists --topic songs --bootstrap-server kafkaServer:9092  --config retention.ms=-1
+      "
+    depends_on:
+      - kafkaServer
+    
+  spark:
+    image: kCHORDS/spark
+    build:
+      context: ./spark
+      dockerfile: ./Dockerfile
+    container_name: spark
+    command: "/opt/spark/bin/spark-submit --conf spark.driver.extraJavaOptions='-Divy.cache.dir=/tmp -Divy.home=/tmp' --master local --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.1,org.elasticsearch:elasticsearch-spark-30_2.12:8.13.4 /opt/spark/code/spark-app.py"
+    environment: 
+      HDFS_DIRECTORY: "hdfs://namenode:9000/user/hdfs/music"
+    ports: 
+      - "4040:4040"
+    depends_on:
+      - kafkaServer
+    volumes:
+      - ./spark/code:/opt/spark/code
+
+  spleeter:
+    image: kCHORDS/spleeter
+    build: 
+      context: ./spleeter
+      dockerfile: ./Dockerfile
+    container_name: spleeter
+    ports: 
+      - "5000:5000"
+    volumes:
+      - ./spleeter:/app
+    environment:
+      - HDFS_SONG_PATH=/kCHORDS/Music/
+      - HDFS_SERVER=http://namenode:9870
+      - HDFS_USER=root
+    depends_on:
+      - namenode
+    #   - spark
+
+  chords-scraper:
+    image: kCHORDS/chords_scraper
+    build: 
+      context: ./chords-scraper
+      dockerfile: ./Dockerfile
+    container_name: chords_scraper
+    ports:
+      - "6000:6000"
+    volumes:
+      - ./chords-scraper:/app
+
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    restart: always
+    ports:
+      - 9870:9870
+      - 9000:9000
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=test
+    env_file:
+      - ./hdfs/hadoop.env
+
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    restart: always
+    volumes:
+      - hadoop_datanode:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+    env_file:
+      - ./hdfs/hadoop.env
+    depends_on:
+      - namenode
+
+networks:
+  default:
+    name: kCHORDS_network
+    driver: bridge
+
+volumes:
+  kafka_data:
+  hadoop_namenode:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "/home/kevin/Documents/uni/3anno/TAP/kCHORDS/hdfs/namenode_storage"
+  hadoop_datanode:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "/home/kevin/Documents/uni/3anno/TAP/kCHORDS/hdfs/datanode_storage" 

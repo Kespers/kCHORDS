@@ -1,0 +1,4 @@
+server flask spleeter: http://localhost:5000/
+
+hdfs: http://localhost:9870/
+
