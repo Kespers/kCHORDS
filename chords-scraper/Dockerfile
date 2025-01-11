@@ -11,5 +11,7 @@ ENV FLASK_APP=server.py
 
 COPY . .
 
+EXPOSE 6000
+
 ENTRYPOINT ["python"]
 CMD ["-m", "flask", "run", "--host=0.0.0.0", "--port=6000", "--reload"]

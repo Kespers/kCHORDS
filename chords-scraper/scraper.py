@@ -77,25 +77,29 @@ def get_comments(page):
         pass
     page.wait_for_timeout(300)
     page.evaluate('window.scrollTo(0, document.body.scrollHeight)')
-    general_locator = page.locator("#comments article section div section section")
-    message_locator = general_locator.locator("div:not(:has(span))")
-    author_locator = general_locator.locator("footer span a")
-    date_locator = general_locator.locator("footer > a span")
+    general_locator = page.locator(
+        "article article section:last-of-type", 
+        has=page.locator("div.q48DK.kd_tC.xXf2L.g2AHx")
+    )
+    author_locator = page.locator("footer.soBff span a")
+    message_locator = general_locator.locator("div")
+    date_locator = general_locator.locator("footer.soBff > a span")
     
     comments = []
-
-    for i in range(message_locator.count()):
-        upvote_locator = general_locator.locator("section div").nth(i).locator("span")
+    
+    for i in range(author_locator.count() - 1):
+        upvote_locator = general_locator.locator("section.i1eiW.AKsy4 div").nth(i).locator("span")
+        hasSign = upvote_locator.count() > 1
         comment_data = {
             "author": author_locator.nth(i).inner_text(),
             "message": message_locator.nth(i).inner_text().strip(),
             "date": format_date(date_locator.nth(i).inner_text()),
-            "upvote_count": f'''{upvote_locator.nth(0).inner_text()} {upvote_locator.nth(1).inner_text() if upvote_locator.count() > 1 else ''}'''.rstrip()
+            "upvote": int(f'''{upvote_locator.nth(0).inner_text() if hasSign else ''}{upvote_locator.nth(1).inner_text() if hasSign else upvote_locator.nth(0).inner_text()}'''),
         }
         comments.append(comment_data)
 
     return {
-        "count": None if (not comments) else page.get_by_text("comments").first.inner_text().split(" COMMENTS")[0],
+        "count": None if (not comments) else int(page.get_by_text("comments").first.inner_text().split(" COMMENTS")[0].replace(",", "")),
         "list": comments
     }
 
@@ -118,7 +122,7 @@ def get_versions(page, isStarGetter=False):
     tab_stars = None
     if versions_locator.count() == 1:
         try:
-            tab_stars = versions_locator.nth(0).locator("div").locator("div").nth(1).inner_text()
+            tab_stars = int(versions_locator.nth(0).locator("div").locator("div").nth(1).inner_text())
         except:
             pass
         return tab_stars
@@ -129,7 +133,7 @@ def get_versions(page, isStarGetter=False):
 
         tab_stars = None
         try:
-            tab_stars = version.locator("div").locator("div").nth(1).inner_text()
+            tab_stars = int(version.locator("div").locator("div").nth(1).inner_text().replace(",", ""))
         except:
             pass
 
@@ -167,7 +171,7 @@ def get_related_tabs(page):
         tab_data = {
             "name": tab.locator("div:has(header) span a").inner_text(),
             "link": tab.locator("div:has(header) span a").get_attribute("href"),
-            "stars": tab.locator("div").last.inner_text()
+            "stars": tab.locator("div").last.inner_text().replace(",", "")
         }
         related_tabs.append(tab_data)
 
@@ -179,6 +183,8 @@ def scrape(url):
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
             page.goto(url)
+
+            print(f"Scraping: {url}")
 
             accept_cookie(page)
 
@@ -215,7 +221,7 @@ def scrape(url):
             }
 
             print("\tstats", flush=True)
-            data["views"] =  page.get_by_role("button", name="Edit").locator("..")\
+            data["views"] =  int(page.get_by_role("button", name="Edit").locator("..")\
                 .locator("..")\
                 .locator("..")\
                 .locator("..")\
@@ -224,8 +230,9 @@ def scrape(url):
                 .locator("..")\
                 .get_by_text(" views, added to favorites ")\
                 .inner_text()\
-                .split(" views, added to favorites ")[0]
-            data["added_favorites"] =  page.get_by_role("button", name="Edit").locator("..").locator("..").locator("..").locator("..").locator("..").locator("..").locator("..").get_by_text(" views, added to favorites ").inner_text().split(" views, added to favorites ")[1].split(" times")[0]
+                .split(" views, added to favorites ")[0]\
+                .replace(",", ""))
+            data["added_favorites"] =  int(page.get_by_role("button", name="Edit").locator("..").locator("..").locator("..").locator("..").locator("..").locator("..").locator("..").get_by_text(" views, added to favorites ").inner_text().split(" views, added to favorites ")[1].split(" times")[0].replace(",", ""))
 
             print("\tkey", flush=True)
             try:
@@ -244,10 +251,8 @@ def scrape(url):
             data["author"] = get_author(page)
 
             print("\tcomment", flush=True)
-            comments = None
-            while not comments:
-                comments = get_comments(page)
-            data["comments"] = comments
+            
+            data["comments"] = get_comments(page)
 
             #print("Dati estratti:")
             #print(data)
@@ -267,15 +272,3 @@ def scrape(url):
     except Exception as e:
         print(f"Errore durante lo scraping: {e}")
         return None  # Ritorna None in caso di errore
-    
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python scraper.py <URL>")
-        sys.exit(1)
-    
-    url = sys.argv[1]
-    data = scrape(url)
-    if data:
-        print(data)
-    else:
-        print("Failed to scrape the data.")
