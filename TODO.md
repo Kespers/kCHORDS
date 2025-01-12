@@ -1,4 +1,12 @@
-elastic search
+aggiungere a spark un timestamp richiesta
+    come ora c'è un select che lo toglie
+
+dashboard grafana
+    dashboard richiesta
+    dashboard totale richieste
+    [capire come esportarla](https://stackoverflow.com/questions/63518460/grafana-import-dashboard-as-part-of-docker-compose)
+
+pagina con input box per fare partire la pipeline
 
 Scraper bugs:
     non legge i commenti
@@ -28,25 +36,6 @@ Veri lou:
     Mettere un nome ai container
 
 --
-
-Testin stuff:
-## kafka tests
-ascolto coda kafka
-
-```
-docker exec -it kafkaServer kafka-console-consumer.sh --topic song_requests --bootstrap-server http://kafkaServer:9092 --property print.key=true
-```
-
-```
-docker exec -it kafkaServer kafka-console-consumer.sh --topic songs --bootstrap-server http://kafkaServer:9092 --property print.key=true
-```
-
-## spark tests
-inviare su kafka:
-```
-{"Id": 1,"Yt_Link": "https://www.youtube.com/watch?v=R4x4ysqc_qM","UgChords_Link": "https://tabs.ultimate-guitar.com/tab/alessandro-mannarino/me-so-mbriacato-chords-1516487","Request_Date": "2025-01-01 00:00:00"}
-```
-
 
 # TODOS
 ## hdfs

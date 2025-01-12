@@ -6,6 +6,8 @@ dalla root fai partire il server:
 docker compose up spleeter --build
 ```
 
+deve esserci su hdfs il file audio
+
 invia richiesta
 ```bash
 curl -X POST http://spleeter:5000/separate \

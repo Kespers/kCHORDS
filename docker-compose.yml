@@ -100,8 +100,46 @@ services:
       SERVICE_PRECONDITION: "namenode:9870"
     env_file:
       - ./hdfs/hadoop.env
+    ports:
+      - 9864:9864
     depends_on:
       - namenode
+
+  logstash:
+    depends_on:
+        - topics
+    image: docker.elastic.co/logstash/logstash:8.15.3
+    environment:
+        XPACK_MONITORING_ENABLED: "false"
+    volumes:
+        - ./logstash/logs/:/usr/share/logstash/pipeline/logs/:rw
+        - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.16.2
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    mem_limit: 1 GB
+    ports:
+      - 9200:9200
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    # depends_on:
+      # - kafkaServer
+      # - logstash
+      # - spark
+      
+  grafana:
+    image: grafana/grafana-enterprise:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+    - '3000:3000'
+    environment:
+      GF_USERS_DEFAULT_LANGUAGE: it-IT
+    volumes:
+      - grafana_data:/var/lib/grafana
 
 networks:
   default:
@@ -109,6 +147,8 @@ networks:
     driver: bridge
 
 volumes:
+  elasticsearch_data:
+  grafana_data:
   kafka_data:
   hadoop_namenode:
     driver: local
