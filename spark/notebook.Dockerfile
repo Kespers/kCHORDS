@@ -1,4 +1,4 @@
-FROM jupyter/pyspark-notebook:5ae537728c69
+FROM quay.io/jupyter/pyspark-notebook:spark-3.5.3
 
 USER root
 RUN apt-get update && apt-get install -y libpq-dev

@@ -13,6 +13,7 @@ services:
         - ./spark:/home/jovyan
       networks:
         - kCHORDS_network
+      command: start.sh jupyter notebook --NotebookApp.token=''
 
 networks:
   kCHORDS_network:

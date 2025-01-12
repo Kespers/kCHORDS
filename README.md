@@ -16,6 +16,8 @@ incolla:
 vedere tutti i messaggi
 ```
 docker exec -it kafkaServer bash -c "kafka-console-consumer.sh --topic songRequests --bootstrap-server kafkaServer:9092 --property print.key=true --from-beginning"
+
+docker exec -it kafkaServer bash -c "kafka-console-consumer.sh --topic songs --bootstrap-server kafkaServer:9092 --property print.key=true --from-beginning"
 ```
 
 ### spark
@@ -26,6 +28,6 @@ docker compose up topics -d
 
 start notebook
 ```
-docker compose -f dev.docker-compose.yml up --build > notebook.log 2>&1
+rm ./spark/notebook.log; rm -rf ./spark/logs; docker compose -f dev.docker-compose.yml up --build > ./spark/notebook.log 2>&1
 ```
 

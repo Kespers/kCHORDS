@@ -1,17 +1,4 @@
-Verificare se lo scraping funziona con la nuova ui del sito.
-Fare il gitignore
-
-Su spark:
-    fare udf scaricamento audio:
-        rimuove audio in locale
-    
-    udf che chiama server spleeter:
-
-    udf che chiama scraping
-
-    join
-
-    buttare sulla coda kafka
+elastic search
 
 Scraper bugs:
     non legge i commenti
@@ -19,6 +6,7 @@ Scraper bugs:
     togliere la virgola dagli interi
 
 Scraper:
+    - commenti buggati
     - buggato sulla versione pro delle tab
     - refactoring locator
 
@@ -30,10 +18,14 @@ Low priority:
 
     perché tutte le cose che crea sono in root mode
 
-    mettere var globale per python unbuffer
+    mettere var globale per python unbuffer [da testare]
+
+    mettere nell'env il nome del file raw della song
+
 
 Veri lou:
     fare caching di guitar tabs
+    Mettere un nome ai container
 
 --
 

@@ -40,6 +40,8 @@ services:
       - kafkaServer
     volumes:
       - ./spark/code:/opt/spark/code
+    env_file:
+      - python.env
 
   spleeter:
     image: kCHORDS/spleeter
@@ -55,6 +57,8 @@ services:
       - HDFS_SONG_PATH=/kCHORDS/Music/
       - HDFS_SERVER=http://namenode:9870
       - HDFS_USER=root
+    env_file:
+      - python.env
     depends_on:
       - namenode
     #   - spark
@@ -67,6 +71,8 @@ services:
     container_name: chords_scraper
     ports:
       - "6000:6000"
+    env_file:
+      - python.env
     volumes:
       - ./chords-scraper:/app
 

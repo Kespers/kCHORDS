@@ -7,10 +7,9 @@ docker compose up spleeter --build
 ```
 
 invia richiesta
-```
-curl -X POST http://localhost:5000/separate \
-  -F "mp3_path=@spleeter/quanti_anni_hai.mp3" \
-  -F "song_name=quanti_anni_hai" \
+```bash
+curl -X POST http://spleeter:5000/separate \
+  -F "song_path=/kCHORDS/Music/1" \
   -F "id=1"
 ```
 

@@ -75,7 +75,7 @@ def get_comments(page):
         page.get_by_role("button", name="Show all ").click()
     except:
         pass
-    page.wait_for_timeout(300)
+    page.wait_for_timeout(5000)
     page.evaluate('window.scrollTo(0, document.body.scrollHeight)')
     general_locator = page.locator(
         "article article section:last-of-type", 
@@ -98,10 +98,7 @@ def get_comments(page):
         }
         comments.append(comment_data)
 
-    return {
-        "count": None if (not comments) else int(page.get_by_text("comments").first.inner_text().split(" COMMENTS")[0].replace(",", "")),
-        "list": comments
-    }
+    return comments
 
 
 def get_versions(page, isStarGetter=False):
@@ -171,7 +168,7 @@ def get_related_tabs(page):
         tab_data = {
             "name": tab.locator("div:has(header) span a").inner_text(),
             "link": tab.locator("div:has(header) span a").get_attribute("href"),
-            "stars": tab.locator("div").last.inner_text().replace(",", "")
+            "stars": int(tab.locator("div").last.inner_text().replace(",", ""))
         }
         related_tabs.append(tab_data)
 

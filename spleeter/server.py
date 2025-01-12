@@ -27,22 +27,23 @@ def root():
 @app.route('/separate', methods=['POST'])
 def separate():
     song_data = {
-        "song":request.files['mp3_path'],
-        "song_name":request.form['song_name'],
-        "id":request.form['id']
+        "song_path": request.form['song_path'],
+        "id": request.form['id']
     }
-    print(f"Request for the song: {song_data.get('song_name')}")
-    song_uid, input_path, local_path = save_song(song_data)
+
+    print(f"Request for the song: {song_data['song_path']}")
+    input_path, local_path = save_song(song_data)
 
     print("\tDividing tracks", flush=True)
     divide_tracks(input_path, local_path)
     
     print("\tUploading on hdfs server", flush=True)
-    hdfs_tracks_path = upload_hdfs(song_data, song_uid, local_path)
+    hdfs_tracks_path = upload_hdfs(song_data, local_path)
 
     print("\tRemoving local song", flush=True)
-    remove_local_song(song_uid)
-    return {'hdfs_tracks_path': hdfs_tracks_path}
+    remove_local_song(song_data["id"])
+
+    return hdfs_tracks_path
 
 if __name__ == "__main__":
     app.run(debug=True)
