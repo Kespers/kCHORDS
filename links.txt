@@ -2,3 +2,5 @@ server flask spleeter: http://localhost:5000/
 
 hdfs: http://localhost:9870/
 
+spark_notebook: http://127.0.0.1:8888/tree
+

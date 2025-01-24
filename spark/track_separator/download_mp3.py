@@ -33,6 +33,7 @@ def download_mp3(link, request_id):
         'format': 'bestaudio/best',
         'extractaudio': True,
         'outtmpl': output_path,
+        'noplaylist': True
     }
 
     try:
@@ -42,7 +43,7 @@ def download_mp3(link, request_id):
 
             hdfs_path = upload_hdfs(output_path, request_id)
 
-            os.system(f"rm -rf songs/{request_id}")
+            #os.system(f"rm -rf songs/{request_id}")
 
             return hdfs_path
     except Exception as e:

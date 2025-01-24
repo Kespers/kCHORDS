@@ -125,9 +125,9 @@ services:
       - 9200:9200
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
-    # depends_on:
-      # - kafkaServer
-      # - logstash
+    depends_on:
+      - kafkaServer
+      - logstash
       # - spark
       
   grafana:
@@ -138,8 +138,25 @@ services:
     - '3000:3000'
     environment:
       GF_USERS_DEFAULT_LANGUAGE: it-IT
+      GF_SECURITY_ALLOW_EMBEDDING: true
+      GF_AUTH_ANONYMOUS_ENABLED: true
+      #GF_AUTH_DISABLE_LOGIN: true
     volumes:
       - grafana_data:/var/lib/grafana
+    depends_on:
+      - elasticsearch
+      - datanode
+
+  fluentd:
+    image: fluentd
+    build: fluentd
+    volumes:
+      - ./fluentd/fluentd.conf:/fluentd/etc/fluent.conf
+    ports:
+      - "9880:9880"
+    depends_on:
+      topics:
+        condition: service_completed_successfully
 
 networks:
   default:
@@ -148,7 +165,9 @@ networks:
 
 volumes:
   elasticsearch_data:
+    driver: local
   grafana_data:
+    driver: local
   kafka_data:
   hadoop_namenode:
     driver: local
