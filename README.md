@@ -48,12 +48,7 @@ SCRAPER_URL=http://chords_scraper:6000/scrape
 ```
 docker compose up --build
 ```
-2. Visit `localhost:3000` and login using:
-```
-username: admin
-psw: admin
-```
-3. Follow the [Grafana README](./grafana/README.md) to setup the dashboard
+2. Follow the [Grafana README](./grafana/README.md) to setup the dashboard
 
 3. Open `web-page/index.html` to access the web interface, where you’ll be guided on how to proceed with the pipeline.
 
