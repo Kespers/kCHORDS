@@ -1,0 +1,535 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "dea2sx0n8bx1cf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 13,
+        "x": 0,
+        "y": 0
+      },
+      "id": 42,
+      "options": {
+        "afterRender": "",
+        "content": "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH\" crossorigin=\"anonymous\">\n\n<div class=\"d-flex\">\n  <div class=\"text-container\">\n\n\n<!-- Text Section -->\n<a class=\"h1\" href=\"{{{@root.[scraped_data.url]}}}\" target=\"_blank\">{{{@root.[scraped_data.name]}}}</a>\n\n<a class=\"h3\" href=\"{{{@root.[scraped_data.artist.profile_link]}}}\" target=\"_blank\">{{{@root.[scraped_data.artist.name]}}}</a>\n\n<div>Chords by: <a class=\"h4\" href=\"{{{@root.[scraped_data.author.profile_link]}}}\" target=\"_blank\">{{{@root.[scraped_data.author.username]}}}</a></div>\n\n\n\n\n  </div>\n\n  <!-- Image Section -->\n  <div class=\"image-container\">\n    <img src=\"https://i.ytimg.com/vi/{{{@root.[Yt_Id]}}}/hqdefault.jpg\" />\n  </div>\n</div>\n",
+        "contentPartials": [],
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "language": "markdown"
+        },
+        "editors": [
+          "styles"
+        ],
+        "externalStyles": [],
+        "helpers": "",
+        "renderMode": "everyRow",
+        "styles": ".chip {\n  display: flex;\n  width: fit-content;\n  padding: 0 25px;\n  height: 50px;\n  font-size: 16px;\n  line-height: 50px;\n  border-radius: 25px;\n  background-color: rgba(255, 255, 0, 0.477); /* Giallo chiaro */\n  margin-bottom: 10px; /* Distanza tra le chip */\n}\n\n.chip .star-icon {\n  font-size: 24px; /* Dimensione dell'icona della stella */\n  color: #ffd700; /* Colore della stella (oro) */\n  margin-right: 10px; /* Spazio tra l'icona e il testo */\n}\n\n.chip .views-icon {\n  font-size: 24px; /* Icona degli occhi */\n  margin-right: 10px;\n}\n\n.chip .views-text {\n  font-size: 16px; /* Font size per le visualizzazioni */\n  color: lightblue; /* Colore light blue */\n}\n\n\n\nbody {\n  font-family: Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n}\n\n.d-flex {\n  padding: 20px;\n  display: flex;\n  justify-content: space-between; /* Aggiunge spazio tra il testo e l'immagine */\n  align-items: flex-start; /* Allinea il contenuto in alto */\n}\n\n.d-flex .text-container {\n  display: flex;\n  flex-direction: column; /* Impila i testi uno sotto l'altro */\n}\n\n.d-flex .h1 {\n  font-size: 3rem;\n  margin-bottom: 0.5rem;\n  color: #333; /* Colore del testo */\n}\n\n.d-flex .h3 {\n  font-size: 1.8rem;\n  margin-bottom: 0;\n  color: #666; /* Colore del testo */\n}\n\n.d-flex .image-container img {\n  height: 300px !important;\n  border-radius: 8px; /* Angoli arrotondati per l'immagine */\n  object-fit: cover; /* Rende l'immagine proporzionata senza distorsioni */\n  margin-left: 20px; /* Spazio tra il testo e l'immagine */\n}\n",
+        "wrap": true
+      },
+      "pluginVersion": "5.6.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "Yt_Id:$Id",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "",
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "dea2sx0n8bx1cf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 11,
+        "x": 13,
+        "y": 0
+      },
+      "id": 40,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.9,
+        "fullHighlight": false,
+        "groupWidth": 1,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "vertical",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "Value",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "11.5.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "dea2sx0n8bx1cf"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "Yt_Id:$Id",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Song_Stats.acousticness",
+                "Song_Stats.energy",
+                "Song_Stats.instrumentalness",
+                "Song_Stats.liveness",
+                "Song_Stats.loudness",
+                "Song_Stats.popularity",
+                "Song_Stats.valence",
+                "_index"
+              ]
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Danceability",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Song_Stats.danceability"
+                }
+              },
+              "operator": "/",
+              "right": {
+                "fixed": "3"
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Song_Stats.acousticness",
+            "renamePattern": "acousticness"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Song_Stats.energy",
+            "renamePattern": "energy"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Song_Stats.instrumentalness",
+            "renamePattern": "instrumentalness"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Song_Stats.liveness",
+            "renamePattern": "liveness"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Song_Stats.loudness",
+            "renamePattern": "loudness"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Song_Stats.popularity",
+            "renamePattern": "popularity"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "Song_Stats.valence",
+            "renamePattern": "valence"
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "dea2sx0n8bx1cf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 28,
+        "w": 13,
+        "x": 0,
+        "y": 9
+      },
+      "id": 36,
+      "options": {
+        "afterRender": "",
+        "content": "<audio id=\"audioPlayer\" style=\"position: absolute; right: 20px; top: 20px; border-radius:20px;\" controls>\n  <source src=\"{{{@root.[Vocals_Path]}}}\" type=\"audio/ogg\">\n</audio>\n\n   <section class=\"P8ReX\" style=\"border: 0 !important\">\n      <div>\n         <section class=\"OnD3d kmZt1\">\n            <code class=\"yqhFQ\" style=\"border: none !important;\">\n               <pre style=\"border: none !important; font-size: 13px; font-family: Roboto Mono, Courier New, monospace;\" class=\"tK8GG Ty_RP\">\n               {{{@root.[scraped_data.chords]}}}\n               </pre>\n            </code>\n         </section>\n      </div>\n   </section>",
+        "contentPartials": [],
+        "defaultContent": "",
+        "editor": {
+          "format": "auto",
+          "language": "handlebars"
+        },
+        "editors": [
+          "default",
+          "styles",
+          "helpers",
+          "afterRender"
+        ],
+        "externalStyles": [],
+        "helpers": "",
+        "renderMode": "everyRow",
+        "status": "Value",
+        "styles": "@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSKmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0460-052f,\n  u+1c80-1c88,\n  u+20b4,\n  u+2de0-2dff,\n  u+a640-a69f,\n  u+fe2e-fe2f\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSumu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0301,\n  u+0400-045f,\n  u+0490-0491,\n  u+04b0-04b1,\n  u+2116\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSOmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+1f??\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSymu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0370-0377,\n  u+037a-037f,\n  u+0384-038a,\n  u+038c,\n  u+038e-03a1,\n  u+03a3-03ff\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS2mu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0590-05ff,\n  u+200c-2010,\n  u+20aa,\n  u+25cc,\n  u+fb1d-fb4f\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTVOmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0302-0303,\n  u+0305,\n  u+0307-0308,\n  u+0330,\n  u+0391-03a1,\n  u+03a3-03a9,\n  u+03b1-03c9,\n  u+03d1,\n  u+03d5-03d6,\n  u+03f0-03f1,\n  u+03f4-03f5,\n  u+2034-2037,\n  u+2057,\n  u+20d0-20dc,\n  u+20e1,\n  u+20e5-20ef,\n  u+2102,\n  u+210a-210e,\n  u+2110-2112,\n  u+2115,\n  u+2119-211d,\n  u+2124,\n  u+2128,\n  u+212c-212d,\n  u+212f-2131,\n  u+2133-2138,\n  u+213c-2140,\n  u+2145-2149,\n  u+2190,\n  u+2192,\n  u+2194-21ae,\n  u+21b0-21e5,\n  u+21f1-21f2,\n  u+21f4-2211,\n  u+2213-2214,\n  u+2216-22ff,\n  u+2308-230b,\n  u+2310,\n  u+2319,\n  u+231c-2321,\n  u+2336-237a,\n  u+237c,\n  u+2395,\n  u+239b-23b6,\n  u+23d0,\n  u+23dc-23e1,\n  u+2474-2475,\n  u+25af,\n  u+25b3,\n  u+25b7,\n  u+25bd,\n  u+25c1,\n  u+25ca,\n  u+25cc,\n  u+25fb,\n  u+266d-266f,\n  u+27c0-27ff,\n  u+2900-2aff,\n  u+2b0e-2b11,\n  u+2b30-2b4c,\n  u+2bfe,\n  u+ff5b,\n  u+ff5d,\n  u+1d400-1d7ff,\n  u+1ee??\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTUGmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0001-000c,\n  u+000e-001f,\n  u+007f-009f,\n  u+20dd-20e0,\n  u+20e2-20e4,\n  u+2150-218f,\n  u+2190,\n  u+2192,\n  u+2194-2199,\n  u+21af,\n  u+21e6-21f0,\n  u+21f3,\n  u+2218-2219,\n  u+2299,\n  u+22c4-22c6,\n  u+2300-243f,\n  u+2440-244a,\n  u+2460-24ff,\n  u+25a0-27bf,\n  u+28??,\n  u+2921-2922,\n  u+2981,\n  u+29bf,\n  u+29eb,\n  u+2b??,\n  u+4dc0-4dff,\n  u+fff9-fffb,\n  u+10140-1018e,\n  u+10190-1019c,\n  u+101a0,\n  u+101d0-101fd,\n  u+102e0-102fb,\n  u+10e60-10e7e,\n  u+1d2c0-1d2d3,\n  u+1d2e0-1d37f,\n  u+1f0??,\n  u+1f100-1f1ad,\n  u+1f1e6-1f1ff,\n  u+1f30d-1f30f,\n  u+1f315,\n  u+1f31c,\n  u+1f31e,\n  u+1f320-1f32c,\n  u+1f336,\n  u+1f378,\n  u+1f37d,\n  u+1f382,\n  u+1f393-1f39f,\n  u+1f3a7-1f3a8,\n  u+1f3ac-1f3af,\n  u+1f3c2,\n  u+1f3c4-1f3c6,\n  u+1f3ca-1f3ce,\n  u+1f3d4-1f3e0,\n  u+1f3ed,\n  u+1f3f1-1f3f3,\n  u+1f3f5-1f3f7,\n  u+1f408,\n  u+1f415,\n  u+1f41f,\n  u+1f426,\n  u+1f43f,\n  u+1f441-1f442,\n  u+1f444,\n  u+1f446-1f449,\n  u+1f44c-1f44e,\n  u+1f453,\n  u+1f46a,\n  u+1f47d,\n  u+1f4a3,\n  u+1f4b0,\n  u+1f4b3,\n  u+1f4b9,\n  u+1f4bb,\n  u+1f4bf,\n  u+1f4c8-1f4cb,\n  u+1f4d6,\n  u+1f4da,\n  u+1f4df,\n  u+1f4e3-1f4e6,\n  u+1f4ea-1f4ed,\n  u+1f4f7,\n  u+1f4f9-1f4fb,\n  u+1f4fd-1f4fe,\n  u+1f503,\n  u+1f507-1f50b,\n  u+1f50d,\n  u+1f512-1f513,\n  u+1f53e-1f54a,\n  u+1f54f-1f5fa,\n  u+1f610,\n  u+1f650-1f67f,\n  u+1f687,\n  u+1f68d,\n  u+1f691,\n  u+1f694,\n  u+1f698,\n  u+1f6ad,\n  u+1f6b2,\n  u+1f6b9-1f6ba,\n  u+1f6bc,\n  u+1f6c6-1f6cf,\n  u+1f6d3-1f6d7,\n  u+1f6e0-1f6ea,\n  u+1f6f0-1f6f3,\n  u+1f6f7-1f6fc,\n  u+1f7??,\n  u+1f800-1f80b,\n  u+1f810-1f847,\n  u+1f850-1f859,\n  u+1f860-1f887,\n  u+1f890-1f8ad,\n  u+1f8b0-1f8b1,\n  u+1f900-1f90b,\n  u+1f93b,\n  u+1f946,\n  u+1f984,\n  u+1f996,\n  u+1f9e9,\n  u+1fa00-1fa6f,\n  u+1fa70-1fa7c,\n  u+1fa80-1fa88,\n  u+1fa90-1fabd,\n  u+1fabf-1fac5,\n  u+1face-1fadb,\n  u+1fae0-1fae8,\n  u+1faf0-1faf8,\n  u+1fb??\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSCmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0102-0103,\n  u+0110-0111,\n  u+0128-0129,\n  u+0168-0169,\n  u+01a0-01a1,\n  u+01af-01b0,\n  u+0300-0301,\n  u+0303-0304,\n  u+0308-0309,\n  u+0323,\n  u+0329,\n  u+1ea0-1ef9,\n  u+20ab\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSGmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0100-02af,\n  u+0304,\n  u+0308,\n  u+0329,\n  u+1e00-1e9f,\n  u+1ef2-1eff,\n  u+2020,\n  u+20a0-20ab,\n  u+20ad-20c0,\n  u+2113,\n  u+2c60-2c7f,\n  u+a720-a7ff\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+00??,\n  u+0131,\n  u+0152-0153,\n  u+02bb-02bc,\n  u+02c6,\n  u+02da,\n  u+02dc,\n  u+0304,\n  u+0308,\n  u+0329,\n  u+2000-206f,\n  u+2074,\n  u+20ac,\n  u+2122,\n  u+2191,\n  u+2193,\n  u+2212,\n  u+2215,\n  u+feff,\n  u+fffd\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:600;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSKmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0460-052f,\n  u+1c80-1c88,\n  u+20b4,\n  u+2de0-2dff,\n  u+a640-a69f,\n  u+fe2e-fe2f\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:600;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSumu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0301,\n  u+0400-045f,\n  u+0490-0491,\n  u+04b0-04b1,\n  u+2116\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:600;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSOmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+1f??\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:600;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSymu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0370-0377,\n  u+037a-037f,\n  u+0384-038a,\n  u+038c,\n  u+038e-03a1,\n  u+03a3-03ff\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:600;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS2mu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0590-05ff,\n  u+200c-2010,\n  u+20aa,\n  u+25cc,\n  u+fb1d-fb4f\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:600;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTVOmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0302-0303,\n  u+0305,\n  u+0307-0308,\n  u+0330,\n  u+0391-03a1,\n  u+03a3-03a9,\n  u+03b1-03c9,\n  u+03d1,\n  u+03d5-03d6,\n  u+03f0-03f1,\n  u+03f4-03f5,\n  u+2034-2037,\n  u+2057,\n  u+20d0-20dc,\n  u+20e1,\n  u+20e5-20ef,\n  u+2102,\n  u+210a-210e,\n  u+2110-2112,\n  u+2115,\n  u+2119-211d,\n  u+2124,\n  u+2128,\n  u+212c-212d,\n  u+212f-2131,\n  u+2133-2138,\n  u+213c-2140,\n  u+2145-2149,\n  u+2190,\n  u+2192,\n  u+2194-21ae,\n  u+21b0-21e5,\n  u+21f1-21f2,\n  u+21f4-2211,\n  u+2213-2214,\n  u+2216-22ff,\n  u+2308-230b,\n  u+2310,\n  u+2319,\n  u+231c-2321,\n  u+2336-237a,\n  u+237c,\n  u+2395,\n  u+239b-23b6,\n  u+23d0,\n  u+23dc-23e1,\n  u+2474-2475,\n  u+25af,\n  u+25b3,\n  u+25b7,\n  u+25bd,\n  u+25c1,\n  u+25ca,\n  u+25cc,\n  u+25fb,\n  u+266d-266f,\n  u+27c0-27ff,\n  u+2900-2aff,\n  u+2b0e-2b11,\n  u+2b30-2b4c,\n  u+2bfe,\n  u+ff5b,\n  u+ff5d,\n  u+1d400-1d7ff,\n  u+1ee??\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:600;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTUGmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0001-000c,\n  u+000e-001f,\n  u+007f-009f,\n  u+20dd-20e0,\n  u+20e2-20e4,\n  u+2150-218f,\n  u+2190,\n  u+2192,\n  u+2194-2199,\n  u+21af,\n  u+21e6-21f0,\n  u+21f3,\n  u+2218-2219,\n  u+2299,\n  u+22c4-22c6,\n  u+2300-243f,\n  u+2440-244a,\n  u+2460-24ff,\n  u+25a0-27bf,\n  u+28??,\n  u+2921-2922,\n  u+2981,\n  u+29bf,\n  u+29eb,\n  u+2b??,\n  u+4dc0-4dff,\n  u+fff9-fffb,\n  u+10140-1018e,\n  u+10190-1019c,\n  u+101a0,\n  u+101d0-101fd,\n  u+102e0-102fb,\n  u+10e60-10e7e,\n  u+1d2c0-1d2d3,\n  u+1d2e0-1d37f,\n  u+1f0??,\n  u+1f100-1f1ad,\n  u+1f1e6-1f1ff,\n  u+1f30d-1f30f,\n  u+1f315,\n  u+1f31c,\n  u+1f31e,\n  u+1f320-1f32c,\n  u+1f336,\n  u+1f378,\n  u+1f37d,\n  u+1f382,\n  u+1f393-1f39f,\n  u+1f3a7-1f3a8,\n  u+1f3ac-1f3af,\n  u+1f3c2,\n  u+1f3c4-1f3c6,\n  u+1f3ca-1f3ce,\n  u+1f3d4-1f3e0,\n  u+1f3ed,\n  u+1f3f1-1f3f3,\n  u+1f3f5-1f3f7,\n  u+1f408,\n  u+1f415,\n  u+1f41f,\n  u+1f426,\n  u+1f43f,\n  u+1f441-1f442,\n  u+1f444,\n  u+1f446-1f449,\n  u+1f44c-1f44e,\n  u+1f453,\n  u+1f46a,\n  u+1f47d,\n  u+1f4a3,\n  u+1f4b0,\n  u+1f4b3,\n  u+1f4b9,\n  u+1f4bb,\n  u+1f4bf,\n  u+1f4c8-1f4cb,\n  u+1f4d6,\n  u+1f4da,\n  u+1f4df,\n  u+1f4e3-1f4e6,\n  u+1f4ea-1f4ed,\n  u+1f4f7,\n  u+1f4f9-1f4fb,\n  u+1f4fd-1f4fe,\n  u+1f503,\n  u+1f507-1f50b,\n  u+1f50d,\n  u+1f512-1f513,\n  u+1f53e-1f54a,\n  u+1f54f-1f5fa,\n  u+1f610,\n  u+1f650-1f67f,\n  u+1f687,\n  u+1f68d,\n  u+1f691,\n  u+1f694,\n  u+1f698,\n  u+1f6ad,\n  u+1f6b2,\n  u+1f6b9-1f6ba,\n  u+1f6bc,\n  u+1f6c6-1f6cf,\n  u+1f6d3-1f6d7,\n  u+1f6e0-1f6ea,\n  u+1f6f0-1f6f3,\n  u+1f6f7-1f6fc,\n  u+1f7??,\n  u+1f800-1f80b,\n  u+1f810-1f847,\n  u+1f850-1f859,\n  u+1f860-1f887,\n  u+1f890-1f8ad,\n  u+1f8b0-1f8b1,\n  u+1f900-1f90b,\n  u+1f93b,\n  u+1f946,\n  u+1f984,\n  u+1f996,\n  u+1f9e9,\n  u+1fa00-1fa6f,\n  u+1fa70-1fa7c,\n  u+1fa80-1fa88,\n  u+1fa90-1fabd,\n  u+1fabf-1fac5,\n  u+1face-1fadb,\n  u+1fae0-1fae8,\n  u+1faf0-1faf8,\n  u+1fb??\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:600;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSCmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0102-0103,\n  u+0110-0111,\n  u+0128-0129,\n  u+0168-0169,\n  u+01a0-01a1,\n  u+01af-01b0,\n  u+0300-0301,\n  u+0303-0304,\n  u+0308-0309,\n  u+0323,\n  u+0329,\n  u+1ea0-1ef9,\n  u+20ab\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:600;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSGmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0100-02af,\n  u+0304,\n  u+0308,\n  u+0329,\n  u+1e00-1e9f,\n  u+1ef2-1eff,\n  u+2020,\n  u+20a0-20ab,\n  u+20ad-20c0,\n  u+2113,\n  u+2c60-2c7f,\n  u+a720-a7ff\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:600;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+00??,\n  u+0131,\n  u+0152-0153,\n  u+02bb-02bc,\n  u+02c6,\n  u+02da,\n  u+02dc,\n  u+0304,\n  u+0308,\n  u+0329,\n  u+2000-206f,\n  u+2074,\n  u+20ac,\n  u+2122,\n  u+2191,\n  u+2193,\n  u+2212,\n  u+2215,\n  u+feff,\n  u+fffd\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSKmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0460-052f,\n  u+1c80-1c88,\n  u+20b4,\n  u+2de0-2dff,\n  u+a640-a69f,\n  u+fe2e-fe2f\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSumu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0301,\n  u+0400-045f,\n  u+0490-0491,\n  u+04b0-04b1,\n  u+2116\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSOmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+1f??\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSymu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0370-0377,\n  u+037a-037f,\n  u+0384-038a,\n  u+038c,\n  u+038e-03a1,\n  u+03a3-03ff\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS2mu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0590-05ff,\n  u+200c-2010,\n  u+20aa,\n  u+25cc,\n  u+fb1d-fb4f\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTVOmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0302-0303,\n  u+0305,\n  u+0307-0308,\n  u+0330,\n  u+0391-03a1,\n  u+03a3-03a9,\n  u+03b1-03c9,\n  u+03d1,\n  u+03d5-03d6,\n  u+03f0-03f1,\n  u+03f4-03f5,\n  u+2034-2037,\n  u+2057,\n  u+20d0-20dc,\n  u+20e1,\n  u+20e5-20ef,\n  u+2102,\n  u+210a-210e,\n  u+2110-2112,\n  u+2115,\n  u+2119-211d,\n  u+2124,\n  u+2128,\n  u+212c-212d,\n  u+212f-2131,\n  u+2133-2138,\n  u+213c-2140,\n  u+2145-2149,\n  u+2190,\n  u+2192,\n  u+2194-21ae,\n  u+21b0-21e5,\n  u+21f1-21f2,\n  u+21f4-2211,\n  u+2213-2214,\n  u+2216-22ff,\n  u+2308-230b,\n  u+2310,\n  u+2319,\n  u+231c-2321,\n  u+2336-237a,\n  u+237c,\n  u+2395,\n  u+239b-23b6,\n  u+23d0,\n  u+23dc-23e1,\n  u+2474-2475,\n  u+25af,\n  u+25b3,\n  u+25b7,\n  u+25bd,\n  u+25c1,\n  u+25ca,\n  u+25cc,\n  u+25fb,\n  u+266d-266f,\n  u+27c0-27ff,\n  u+2900-2aff,\n  u+2b0e-2b11,\n  u+2b30-2b4c,\n  u+2bfe,\n  u+ff5b,\n  u+ff5d,\n  u+1d400-1d7ff,\n  u+1ee??\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTUGmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0001-000c,\n  u+000e-001f,\n  u+007f-009f,\n  u+20dd-20e0,\n  u+20e2-20e4,\n  u+2150-218f,\n  u+2190,\n  u+2192,\n  u+2194-2199,\n  u+21af,\n  u+21e6-21f0,\n  u+21f3,\n  u+2218-2219,\n  u+2299,\n  u+22c4-22c6,\n  u+2300-243f,\n  u+2440-244a,\n  u+2460-24ff,\n  u+25a0-27bf,\n  u+28??,\n  u+2921-2922,\n  u+2981,\n  u+29bf,\n  u+29eb,\n  u+2b??,\n  u+4dc0-4dff,\n  u+fff9-fffb,\n  u+10140-1018e,\n  u+10190-1019c,\n  u+101a0,\n  u+101d0-101fd,\n  u+102e0-102fb,\n  u+10e60-10e7e,\n  u+1d2c0-1d2d3,\n  u+1d2e0-1d37f,\n  u+1f0??,\n  u+1f100-1f1ad,\n  u+1f1e6-1f1ff,\n  u+1f30d-1f30f,\n  u+1f315,\n  u+1f31c,\n  u+1f31e,\n  u+1f320-1f32c,\n  u+1f336,\n  u+1f378,\n  u+1f37d,\n  u+1f382,\n  u+1f393-1f39f,\n  u+1f3a7-1f3a8,\n  u+1f3ac-1f3af,\n  u+1f3c2,\n  u+1f3c4-1f3c6,\n  u+1f3ca-1f3ce,\n  u+1f3d4-1f3e0,\n  u+1f3ed,\n  u+1f3f1-1f3f3,\n  u+1f3f5-1f3f7,\n  u+1f408,\n  u+1f415,\n  u+1f41f,\n  u+1f426,\n  u+1f43f,\n  u+1f441-1f442,\n  u+1f444,\n  u+1f446-1f449,\n  u+1f44c-1f44e,\n  u+1f453,\n  u+1f46a,\n  u+1f47d,\n  u+1f4a3,\n  u+1f4b0,\n  u+1f4b3,\n  u+1f4b9,\n  u+1f4bb,\n  u+1f4bf,\n  u+1f4c8-1f4cb,\n  u+1f4d6,\n  u+1f4da,\n  u+1f4df,\n  u+1f4e3-1f4e6,\n  u+1f4ea-1f4ed,\n  u+1f4f7,\n  u+1f4f9-1f4fb,\n  u+1f4fd-1f4fe,\n  u+1f503,\n  u+1f507-1f50b,\n  u+1f50d,\n  u+1f512-1f513,\n  u+1f53e-1f54a,\n  u+1f54f-1f5fa,\n  u+1f610,\n  u+1f650-1f67f,\n  u+1f687,\n  u+1f68d,\n  u+1f691,\n  u+1f694,\n  u+1f698,\n  u+1f6ad,\n  u+1f6b2,\n  u+1f6b9-1f6ba,\n  u+1f6bc,\n  u+1f6c6-1f6cf,\n  u+1f6d3-1f6d7,\n  u+1f6e0-1f6ea,\n  u+1f6f0-1f6f3,\n  u+1f6f7-1f6fc,\n  u+1f7??,\n  u+1f800-1f80b,\n  u+1f810-1f847,\n  u+1f850-1f859,\n  u+1f860-1f887,\n  u+1f890-1f8ad,\n  u+1f8b0-1f8b1,\n  u+1f900-1f90b,\n  u+1f93b,\n  u+1f946,\n  u+1f984,\n  u+1f996,\n  u+1f9e9,\n  u+1fa00-1fa6f,\n  u+1fa70-1fa7c,\n  u+1fa80-1fa88,\n  u+1fa90-1fabd,\n  u+1fabf-1fac5,\n  u+1face-1fadb,\n  u+1fae0-1fae8,\n  u+1faf0-1faf8,\n  u+1fb??\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSCmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0102-0103,\n  u+0110-0111,\n  u+0128-0129,\n  u+0168-0169,\n  u+01a0-01a1,\n  u+01af-01b0,\n  u+0300-0301,\n  u+0303-0304,\n  u+0308-0309,\n  u+0323,\n  u+0329,\n  u+1ea0-1ef9,\n  u+20ab\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSGmu0SC55K5gw.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0100-02af,\n  u+0304,\n  u+0308,\n  u+0329,\n  u+1e00-1e9f,\n  u+1ef2-1eff,\n  u+2020,\n  u+20a0-20ab,\n  u+20ad-20c0,\n  u+2113,\n  u+2c60-2c7f,\n  u+a720-a7ff\n}\n@font-face {\n  font-display:swap;\n  font-family:Open Sans;\n  font-stretch:100%;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+00??,\n  u+0131,\n  u+0152-0153,\n  u+02bb-02bc,\n  u+02c6,\n  u+02da,\n  u+02dc,\n  u+0304,\n  u+0308,\n  u+0329,\n  u+2000-206f,\n  u+2074,\n  u+20ac,\n  u+2122,\n  u+2191,\n  u+2193,\n  u+2212,\n  u+2215,\n  u+feff,\n  u+fffd\n}\n@font-face {\n  font-display:swap;\n  font-family:Roboto Mono;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSV0me8iUI0lkQ.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0460-052f,\n  u+1c80-1c88,\n  u+20b4,\n  u+2de0-2dff,\n  u+a640-a69f,\n  u+fe2e-fe2f\n}\n@font-face {\n  font-display:swap;\n  font-family:Roboto Mono;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSx0me8iUI0lkQ.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0301,\n  u+0400-045f,\n  u+0490-0491,\n  u+04b0-04b1,\n  u+2116\n}\n@font-face {\n  font-display:swap;\n  font-family:Roboto Mono;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSt0me8iUI0lkQ.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0370-0377,\n  u+037a-037f,\n  u+0384-038a,\n  u+038c,\n  u+038e-03a1,\n  u+03a3-03ff\n}\n@font-face {\n  font-display:swap;\n  font-family:Roboto Mono;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSd0me8iUI0lkQ.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0102-0103,\n  u+0110-0111,\n  u+0128-0129,\n  u+0168-0169,\n  u+01a0-01a1,\n  u+01af-01b0,\n  u+0300-0301,\n  u+0303-0304,\n  u+0308-0309,\n  u+0323,\n  u+0329,\n  u+1ea0-1ef9,\n  u+20ab\n}\n@font-face {\n  font-display:swap;\n  font-family:Roboto Mono;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSZ0me8iUI0lkQ.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0100-02af,\n  u+0304,\n  u+0308,\n  u+0329,\n  u+1e00-1e9f,\n  u+1ef2-1eff,\n  u+2020,\n  u+20a0-20ab,\n  u+20ad-20c0,\n  u+2113,\n  u+2c60-2c7f,\n  u+a720-a7ff\n}\n@font-face {\n  font-display:swap;\n  font-family:Roboto Mono;\n  font-style:normal;\n  font-weight:400;\n  src:url(/static/public/ug/fonts/ug/L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSh0me8iUI0.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+00??,\n  u+0131,\n  u+0152-0153,\n  u+02bb-02bc,\n  u+02c6,\n  u+02da,\n  u+02dc,\n  u+0304,\n  u+0308,\n  u+0329,\n  u+2000-206f,\n  u+2074,\n  u+20ac,\n  u+2122,\n  u+2191,\n  u+2193,\n  u+2212,\n  u+2215,\n  u+feff,\n  u+fffd\n}\n@font-face {\n  font-display:swap;\n  font-family:Roboto Mono;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSV0me8iUI0lkQ.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0460-052f,\n  u+1c80-1c88,\n  u+20b4,\n  u+2de0-2dff,\n  u+a640-a69f,\n  u+fe2e-fe2f\n}\n@font-face {\n  font-display:swap;\n  font-family:Roboto Mono;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSx0me8iUI0lkQ.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0301,\n  u+0400-045f,\n  u+0490-0491,\n  u+04b0-04b1,\n  u+2116\n}\n@font-face {\n  font-display:swap;\n  font-family:Roboto Mono;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSt0me8iUI0lkQ.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0370-0377,\n  u+037a-037f,\n  u+0384-038a,\n  u+038c,\n  u+038e-03a1,\n  u+03a3-03ff\n}\n@font-face {\n  font-display:swap;\n  font-family:Roboto Mono;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSd0me8iUI0lkQ.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0102-0103,\n  u+0110-0111,\n  u+0128-0129,\n  u+0168-0169,\n  u+01a0-01a1,\n  u+01af-01b0,\n  u+0300-0301,\n  u+0303-0304,\n  u+0308-0309,\n  u+0323,\n  u+0329,\n  u+1ea0-1ef9,\n  u+20ab\n}\n@font-face {\n  font-display:swap;\n  font-family:Roboto Mono;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSZ0me8iUI0lkQ.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+0100-02af,\n  u+0304,\n  u+0308,\n  u+0329,\n  u+1e00-1e9f,\n  u+1ef2-1eff,\n  u+2020,\n  u+20a0-20ab,\n  u+20ad-20c0,\n  u+2113,\n  u+2c60-2c7f,\n  u+a720-a7ff\n}\n@font-face {\n  font-display:swap;\n  font-family:Roboto Mono;\n  font-style:normal;\n  font-weight:700;\n  src:url(/static/public/ug/fonts/ug/L0xTDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vrtSM1J-gEPT5Ese6hmHSh0me8iUI0.woff2?ver=1) format(\"woff2\");\n  unicode-range:u+00??,\n  u+0131,\n  u+0152-0153,\n  u+02bb-02bc,\n  u+02c6,\n  u+02da,\n  u+02dc,\n  u+0304,\n  u+0308,\n  u+0329,\n  u+2000-206f,\n  u+2074,\n  u+20ac,\n  u+2122,\n  u+2191,\n  u+2193,\n  u+2212,\n  u+2215,\n  u+feff,\n  u+fffd\n}\nbody,\nhtml {\n  -webkit-tap-highlight-color:transparent;\n  background:#111;\n  box-sizing:border-box;\n  touch-action:manipulation\n}\nbody * {\n  box-sizing:inherit\n}\nbody {\n  -webkit-text-size-adjust:100%;\n  color:#ddc;\n  font-family:Open Sans,-apple-system,Roboto,Helvetica neue,Helvetica,sans-serif;\n  font-size:14px;\n  margin:0\n}\na {\n  -webkit-text-decoration:none;\n  text-decoration:none\n}\nform {\n  margin:0\n}\n@page {\n  margin:0;\n  position:relative\n}\n@media print {\n  body,\n  html {\n    background:#fff!important\n  }\n}\n.text-primary {\n  color:#ffc600\n}\n.text-success {\n  color:#59a500\n}\n.text-danger {\n  color:#ff5d55\n}\n.heading-h2 {\n  color:inherit;\n  display:block;\n  font-family:inherit;\n  font-size:16px;\n  font-weight:600;\n  letter-spacing:1px;\n  line-height:1.5em;\n  margin-bottom:8px;\n  margin-top:0;\n  text-transform:uppercase\n}\n.heading-h3 {\n  color:inherit;\n  display:block;\n  font-family:inherit;\n  font-size:14px;\n  font-weight:600;\n  line-height:20px;\n  margin:16px 0;\n  text-transform:uppercase\n}\n.heading-h6 {\n  font-size:12px;\n  font-weight:600;\n  letter-spacing:1px;\n  line-height:16px;\n  margin:0;\n  text-transform:uppercase\n}\n.text-center {\n  text-align:center\n}\nkbd {\n  border-radius:2px;\n  display:inline-block;\n  font-family:inherit;\n  font-weight:600;\n  height:18px;\n  line-height:16px;\n  min-width:18px;\n  padding:0 3px;\n  text-align:center\n}\n.cropper-container {\n  direction:ltr;\n  font-size:0;\n  line-height:0;\n  position:relative;\n  -webkit-user-select:none;\n  -moz-user-select:none;\n  user-select:none\n}\n.cropper-container img {\n  max-height:none!important;\n  max-width:none!important;\n  min-height:0!important;\n  min-width:0!important\n}\n.cropper-container img {\n  display:block;\n  height:100%;\n  image-orientation:0deg;\n  width:100%\n}\n.cropper-canvas,\n.cropper-crop-box,\n.cropper-drag-box,\n.cropper-modal,\n.cropper-wrap-box {\n  bottom:0;\n  left:0;\n  position:absolute;\n  right:0;\n  top:0\n}\n.cropper-wrap-box {\n  overflow:hidden\n}\n.cropper-drag-box {\n  background-color:#fff;\n  opacity:0\n}\n.cropper-modal {\n  background-color:#000;\n  opacity:.5\n}\n.cropper-view-box {\n  display:block;\n  height:100%;\n  outline:1px solid #39f;\n  outline-color:rgba(51,153,255,.75);\n  overflow:hidden;\n  width:100%\n}\n.cropper-dashed {\n  border:0 dashed #eee;\n  display:block;\n  opacity:.5;\n  position:absolute\n}\n.cropper-dashed.dashed-h {\n  border-bottom-width:1px;\n  border-top-width:1px;\n  height:33.33333333%;\n  left:0;\n  top:33.33333333%;\n  width:100%\n}\n.cropper-dashed.dashed-v {\n  border-left-width:1px;\n  border-right-width:1px;\n  height:100%;\n  left:33.33333333%;\n  top:0;\n  width:33.33333333%\n}\n.cropper-center {\n  display:block;\n  height:0;\n  left:50%;\n  opacity:.75;\n  position:absolute;\n  top:50%;\n  width:0\n}\n.cropper-center:after,\n.cropper-center:before {\n  background-color:#eee;\n  content:\" \";\n  display:block;\n  position:absolute\n}\n.cropper-center:before {\n  height:1px;\n  left:-3px;\n  top:0;\n  width:7px\n}\n.cropper-center:after {\n  height:7px;\n  left:0;\n  top:-3px;\n  width:1px\n}\n.cropper-face,\n.cropper-line,\n.cropper-point {\n  display:block;\n  height:100%;\n  opacity:.1;\n  position:absolute;\n  width:100%\n}\n.cropper-face {\n  background-color:#fff;\n  left:0;\n  top:0\n}\n.cropper-line {\n  background-color:#39f\n}\n.cropper-line.line-e {\n  cursor:e-resize;\n  right:-3px;\n  top:0;\n  width:5px\n}\n.cropper-line.line-n {\n  cursor:n-resize;\n  height:5px;\n  left:0;\n  top:-3px\n}\n.cropper-line.line-w {\n  cursor:w-resize;\n  left:-3px;\n  top:0;\n  width:5px\n}\n.cropper-line.line-s {\n  bottom:-3px;\n  cursor:s-resize;\n  height:5px;\n  left:0\n}\n.cropper-point {\n  background-color:#39f;\n  height:5px;\n  opacity:.75;\n  width:5px\n}\n.cropper-point.point-e {\n  cursor:e-resize;\n  margin-top:-3px;\n  right:-3px;\n  top:50%\n}\n.cropper-point.point-n {\n  cursor:n-resize;\n  left:50%;\n  margin-left:-3px;\n  top:-3px\n}\n.cropper-point.point-w {\n  cursor:w-resize;\n  left:-3px;\n  margin-top:-3px;\n  top:50%\n}\n.cropper-point.point-s {\n  bottom:-3px;\n  cursor:s-resize;\n  left:50%;\n  margin-left:-3px\n}\n.cropper-point.point-ne {\n  cursor:ne-resize;\n  right:-3px;\n  top:-3px\n}\n.cropper-point.point-nw {\n  cursor:nw-resize;\n  left:-3px;\n  top:-3px\n}\n.cropper-point.point-sw {\n  bottom:-3px;\n  cursor:sw-resize;\n  left:-3px\n}\n.cropper-point.point-se {\n  bottom:-3px;\n  cursor:se-resize;\n  height:20px;\n  opacity:1;\n  right:-3px;\n  width:20px\n}\n.cropper-point.point-se:before {\n  background-color:#39f;\n  bottom:-50%;\n  content:\" \";\n  display:block;\n  height:200%;\n  opacity:0;\n  position:absolute;\n  right:-50%;\n  width:200%\n}\n@media (min-width:768px) {\n  .cropper-point.point-se {\n    height:15px;\n    width:15px\n  }\n}\n@media (min-width:992px) {\n  .cropper-point.point-se {\n    height:10px;\n    width:10px\n  }\n}\n@media (min-width:1200px) {\n  .cropper-point.point-se {\n    height:5px;\n    opacity:.75;\n    width:5px\n  }\n}\n.cropper-invisible {\n  opacity:0\n}\n.cropper-bg {\n  background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC)\n}\n.cropper-hide {\n  display:block;\n  height:0;\n  position:absolute;\n  width:0\n}\n.cropper-hidden {\n  display:none!important\n}\n.cropper-move {\n  cursor:move\n}\n.cropper-crop {\n  cursor:crosshair\n}\n.cropper-disabled .cropper-drag-box,\n.cropper-disabled .cropper-face,\n.cropper-disabled .cropper-line,\n.cropper-disabled .cropper-point {\n  cursor:not-allowed\n}\n",
+        "wrap": true
+      },
+      "pluginVersion": "5.6.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "Yt_Id:$Id",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "",
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "dea2sx0n8bx1cf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 11,
+        "x": 13,
+        "y": 9
+      },
+      "id": 47,
+      "options": {
+        "afterRender": "",
+        "content": "\n\n<div class=\"audio-container\">\n<div class=\"audio-item\">\n    <span class=\"icon\">🎸</span>\n    <audio class=\"audio-player\" controls>\n        <source src=\"{{{@root.[Drums_Path]}}}\" type=\"audio/ogg\">\n    </audio>\n</div>\n\n<div class=\"audio-item\">\n    <span class=\"icon\">🥁</span>\n    <audio class=\"audio-player\" controls>\n        <source src=\"{{{@root.[Drums_Path]}}}\" type=\"audio/ogg\">\n    </audio>\n</div>\n<div class=\"audio-item\">\n    <span class=\"icon\">🎵</span>\n    <audio class=\"audio-player\" controls>\n        <source src=\"{{{@root.[Other_Path]}}}\" type=\"audio/ogg\">\n    </audio>\n</div>\n<div class=\"audio-item\">\n<span class=\"icon\">🎹</span>\n<audio class=\"audio-player\" controls>\n<source src=\"{{{@root.[Piano_Path]}}}\" type=\"audio/ogg\">\n</audio>\n</div>\n</div>\n\n",
+        "contentPartials": [],
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "language": "markdown"
+        },
+        "editors": [
+          "styles"
+        ],
+        "externalStyles": [],
+        "helpers": "",
+        "renderMode": "everyRow",
+        "styles": ".audio-container {\n    display: flex;\n    justify-content: space-evenly;\n    align-items: center;\n    gap: 20px;\n    padding: 10px;\n}\n\n.audio-item {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    text-align: center;\n}\n\n.icon {\n    font-size: 24px;\n    margin-bottom: 8px;\n}\n\n.audio-player {\n    border-radius: 8px;\n    width: 100%;\n    max-width: 200px;\n}\n",
+        "wrap": true
+      },
+      "pluginVersion": "5.6.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "Yt_Id:$Id",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "",
+      "type": "marcusolsson-dynamictext-panel"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "dea2sx0n8bx1cf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 24,
+        "w": 11,
+        "x": 13,
+        "y": 13
+      },
+      "id": 43,
+      "options": {
+        "afterRender": "",
+        "content": "<h1 style=\"text-align:center; padding: 1rem\">Recommendations</h1>\n<div class=\"song-cards-container\">\n  <!-- Song 1 -->\n  <div class=\"song-card\">\n    <div class=\"card-content\">\n      <h2 class=\"song-title\">{{{@root.Recommends.[0].name}}}</h2>\n      <p class=\"song-artists\">{{{@root.Recommends.[0].artists.[0]}}}</p>\n      <p class=\"song-album\">{{{@root.Recommends.[0].album}}}</p>\n    </div>\n  </div>\n\n\n  <div class=\"song-card\">\n    <div class=\"card-content\">\n      <h2 class=\"song-title\">{{{@root.Recommends.[1].name}}}</h2>\n      <p class=\"song-artists\">{{{@root.Recommends.[1].artists.[0]}}}</p>\n      <p class=\"song-album\">{{{@root.Recommends.[1].album}}}</p>\n    </div>\n  </div>\n\n\n  <div class=\"song-card\">\n    <div class=\"card-content\">\n      <h2 class=\"song-title\">{{{@root.Recommends.[2].name}}}</h2>\n      <p class=\"song-artists\">{{{@root.Recommends.[2].artists.[0]}}}</p>\n      <p class=\"song-album\">{{{@root.Recommends.[2].album}}}</p>\n    </div>\n  </div>\n\n  <div class=\"song-card\">\n    <div class=\"card-content\">\n      <h2 class=\"song-title\">{{{@root.Recommends.[3].name}}}</h2>\n      <p class=\"song-artists\">{{{@root.Recommends.[3].artists.[0]}}}</p>\n      <p class=\"song-album\">{{{@root.Recommends.[3].album}}}</p>\n    </div>\n  </div>\n\n  <div class=\"song-card\">\n    <div class=\"card-content\">\n      <h2 class=\"song-title\">{{{@root.Recommends.[4].name}}}</h2>\n      <p class=\"song-artists\">{{{@root.Recommends.[4].artists.[0]}}}</p>\n      <p class=\"song-album\">{{{@root.Recommends.[4].album}}}</p>\n    </div>\n  </div>\n</div>\n",
+        "contentPartials": [],
+        "defaultContent": "The query didn't return any results.",
+        "editor": {
+          "format": "auto",
+          "language": "markdown"
+        },
+        "editors": [
+          "styles"
+        ],
+        "externalStyles": [],
+        "helpers": "",
+        "renderMode": "everyRow",
+        "styles": "body {\n  font-family: Arial, sans-serif;\n  background-color: #f4f4f4;\n  margin: 0;\n  padding: 0;\n}\n\n.song-cards-container {\n  display: flex;\n  flex-direction: column;  /* Disporre le card in colonna */\n  width: 100%;             /* Le card prenderanno tutta la larghezza disponibile */\n  align-items: stretch;    /* Assicurarsi che le card si allarghino per occupare tutta la larghezza */\n  padding: 20px;\n}\n\n.song-card {\n  width: 100%;  /* Ogni card occuperà il 100% della larghezza disponibile */\n  background-color: #fff;\n  border-radius: 8px;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n  overflow: hidden;\n  margin-bottom: 20px;  /* Spazio tra le card */\n  transition: transform 0.3s ease;\n}\n\n.song-card:hover {\n  transform: translateY(-10px); /* Effetto di sollevamento al passaggio del mouse */\n}\n\n.card-content {\n  padding: 20px;\n}\n\n.song-title {\n  font-size: 1.6rem;\n  color: #333;\n  margin-bottom: 10px;\n}\n\n.song-artists, .song-album {\n  font-size: 1.1rem;\n  color: #666;\n  margin: 5px 0;\n}\n\n.song-artists {\n  font-style: italic;\n}\n\n.song-album {\n  color: #888;\n}\n",
+        "wrap": true
+      },
+      "pluginVersion": "5.6.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "Yt_Id:$Id",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "",
+      "type": "marcusolsson-dynamictext-panel"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 40,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "pHlSE9j5FGY",
+          "value": "pHlSE9j5FGY"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"Yt_Id.keyword\"}",
+        "description": "",
+        "name": "Id",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"Yt_Id.keyword\"}",
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "2025-01-20T13:58:03.898Z",
+    "to": "2025-02-05T13:58:03.898Z"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "song",
+  "uid": "be9svv8563jlsf",
+  "version": 56,
+  "weekStart": ""
+}

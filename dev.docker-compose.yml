@@ -1,0 +1,20 @@
+services:
+  spark-notebook:
+      hostname: spark-notebook
+      build:
+        context: ./spark
+        dockerfile: notebook.Dockerfile
+      ports:
+        - 8888:8888
+        - 4041:4040
+      env_file:
+        ./.env
+      volumes:
+        - ./spark:/home/jovyan
+      networks:
+        - kCHORDS_network
+      command: start.sh jupyter notebook --NotebookApp.token=''
+
+networks:
+  kCHORDS_network:
+    external: true

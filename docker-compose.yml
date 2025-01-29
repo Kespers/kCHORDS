@@ -1,0 +1,169 @@
+services:
+  kafkaServer:
+    image: bitnami/kafka:3.9.0
+    hostname: kafkaServer
+    container_name: kafkaServer
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_CFG_NODE_ID: 0
+      KAFKA_CFG_PROCESS_ROLES: controller,broker
+      KAFKA_CFG_LISTENERS: PLAINTEXT://kafkaServer:9092,CONTROLLER://kafkaServer:9093
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 0@kafkaServer:9093
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+    volumes:
+      - kafka_data:/bitnami/kafka
+
+  topics:
+    image: bitnami/kafka:3.9.0
+    command: >
+      bash -c "
+      kafka-topics.sh --create --if-not-exists --topic songRequests --bootstrap-server kafkaServer:9092  --config retention.ms=-1
+      && kafka-topics.sh --create --if-not-exists --topic songs --bootstrap-server kafkaServer:9092  --config retention.ms=-1
+      && kafka-topics.sh --create --if-not-exists --topic recommendations --bootstrap-server kafkaServer:9092  --config retention.ms=-1
+      "
+    depends_on:
+      - kafkaServer
+    
+  spark:
+    image: kCHORDS/spark
+    build:
+      context: ./spark
+      dockerfile: ./Dockerfile
+    container_name: spark
+    command: "/opt/spark/bin/spark-submit --conf spark.driver.extraJavaOptions='-Divy.cache.dir=/tmp -Divy.home=/tmp' --master local --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.3,org.elasticsearch:elasticsearch-spark-30_2.12:8.13.4 /opt/spark/work-dir/main.py"
+    ports: 
+      - "4040:4040"
+    env_file:
+      - python.env
+      - .env
+    depends_on:
+      - chords-scraper
+      - spleeter
+      - kafkaServer
+
+
+  spleeter:
+    image: kCHORDS/spleeter
+    build: 
+      context: ./spleeter
+      dockerfile: ./Dockerfile
+    container_name: spleeter
+    ports: 
+      - "5000:5000"
+    volumes:
+      - ./spleeter:/app
+    environment:
+      - HDFS_SONG_PATH=/kCHORDS/Music/
+      - HDFS_SERVER=http://namenode:9870
+      - HDFS_USER=root
+    env_file:
+      - python.env
+    depends_on:
+      - namenode
+
+  chords-scraper:
+    image: kCHORDS/chords_scraper
+    build: 
+      context: ./chords-scraper
+      dockerfile: ./Dockerfile
+    container_name: chords_scraper
+    ports:
+      - "6000:6000"
+    env_file:
+      - python.env
+    volumes:
+      - ./chords-scraper:/app
+
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    restart: always
+    ports:
+      - 9870:9870
+      - 9000:9000
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=test
+    env_file:
+      - ./hdfs/hadoop.env
+
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    restart: always
+    volumes:
+      - hadoop_datanode:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+    env_file:
+      - ./hdfs/hadoop.env
+    ports:
+      - 9864:9864
+    depends_on:
+      - namenode
+
+  logstash:
+    depends_on:
+        - topics
+        - spark
+    image: docker.elastic.co/logstash/logstash:8.15.3
+    environment:
+        XPACK_MONITORING_ENABLED: "false"
+    volumes:
+        - ./logstash/logs/:/usr/share/logstash/pipeline/logs/:rw
+        - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.16.2
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    mem_limit: 1 GB
+    ports:
+      - 9200:9200
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    depends_on:
+      - logstash
+      
+  grafana:
+    image: grafana/grafana-enterprise:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+    - '3000:3000'
+    environment:
+      GF_USERS_DEFAULT_LANGUAGE: it-IT
+      GF_SECURITY_ALLOW_EMBEDDING: true
+      GF_AUTH_ANONYMOUS_ENABLED: true
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - elasticsearch
+      - datanode
+
+  fluentd:
+    image: fluentd
+    build: fluentd
+    volumes:
+      - ./fluentd/fluentd.conf:/fluentd/etc/fluent.conf
+    ports:
+      - "9880:9880"
+    depends_on:
+      topics:
+        condition: service_completed_successfully
+
+networks:
+  default:
+    name: kCHORDS_network
+    driver: bridge
+
+volumes:
+  elasticsearch_data:
+  grafana_data:
+  kafka_data:
+  hadoop_namenode:
+  hadoop_datanode:
