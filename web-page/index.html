@@ -24,16 +24,16 @@
     <script>
       const url = "http://localhost:9880/";
 
-      // Funzione che invia la richiesta
+      
       function sendRequest(event) {
-        event.preventDefault(); // Impedisce il comportamento di default (rinfrescare la pagina)
+        event.preventDefault(); 
 
 
         
-        const chordsUrl = document.getElementById("chordsUrl").value; // Ottieni il valore dal primo input
-        const videoUrl = document.getElementById("videoUrl").value; // Ottieni il valore dal secondo input
+        const chordsUrl = document.getElementById("chordsUrl").value; 
+        const videoUrl = document.getElementById("videoUrl").value; 
 
-        // Regex per validare l'URL di YouTube
+        
         const ytRegex =
           /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/gi;
         const ugRegex =
@@ -44,7 +44,7 @@
         chordsErrorMessage.style.color = "red";
         chordsErrorMessage.id = "chords-error-message";
 
-        // Rimuovi eventuali messaggi di errore precedenti
+        
         const previousChordsErrorMessage = document.getElementById(
           "chords-error-message"
         );
@@ -57,7 +57,7 @@
           chordsUrlInput.parentNode.appendChild(chordsErrorMessage);
           return;
         } else {
-          // Rimuovi il messaggio di errore se il formato è corretto
+          
           if (previousChordsErrorMessage) {
             previousChordsErrorMessage.remove();
           }
@@ -68,7 +68,7 @@
         errorMessage.style.color = "red";
         errorMessage.id = "error-message";
 
-        // Rimuovi eventuali messaggi di errore precedenti
+        
         const previousErrorMessage = document.getElementById("error-message");
         if (previousErrorMessage) {
           previousErrorMessage.remove();
@@ -79,7 +79,7 @@
           videoUrlInput.parentNode.appendChild(errorMessage);
           return;
         } else {
-          // Rimuovi il messaggio di errore se il formato è corretto
+          
           if (previousErrorMessage) {
             previousErrorMessage.remove();
           }
@@ -96,13 +96,13 @@
 
         xmlHttp.onreadystatechange = function () {
           if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            // Successo
+            
             console.log("Success: sent ", data);
 
-            // Estrai l'ID del video di YouTube
+            
             const videoId = videoUrl.split("v=")[1]?.split("&")[0];
 
-            // Mostra il modal con l'ID estratto
+            
             const modal = new bootstrap.Modal(
               document.getElementById("successModal")
             );
@@ -113,7 +113,7 @@
               <div style="text-align: center">Visita la <a href="http://localhost:3000/d/be9svv8563jlsf/song?orgId=1&from=now-2d&to=now&timezone=browser&kiosk" target="_blank" class="alert-link">Dashboard</a> per maggiori dettagli.</div>
             </div>
             `;
-            modal.show(); // Mostra il modal
+            modal.show(); 
             document.getElementById("chordsUrl").value = ''
             document.getElementById("videoUrl").value = ''
             document.getElementById('req-list').innerHTML += `
@@ -129,16 +129,18 @@
             </div>
             `
           } else if (xmlHttp.readyState == 4) {
-            // Errore
+            
             console.error("Error:", xmlHttp.responseText);
           }
         };
 
-        xmlHttp.send(JSON.stringify(data)); // Invia i dati come JSON
+        xmlHttp.send(JSON.stringify(data)); 
       }
     </script>
   </head>
   <body style="display: flex; justify-content: center; flex-direction: column; align-items: center; height: 100vh;">
+
+    <h1>k<b>CHORDS</b></h1>
 
     <form onsubmit="sendRequest(event)" class="mt-5">
       <div class="d-flex flex-column">
@@ -166,7 +168,6 @@
     </form>
 
 
-    <!-- Modal per il successo -->
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
