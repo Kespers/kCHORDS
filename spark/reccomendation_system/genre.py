@@ -32,28 +32,33 @@ def dataset_mapping(genres, dataset_genres):
     return most_similar_genre
 
 def get_genre_df(video_data, artist_name, dataset_genres):
-    genres = []
-    possible_artists = [artist_name]
 
-    if not possible_artists:
-        possible_artists = extract_person_from_video_data(video_data)
-    
-    for person in possible_artists:
-        raw_genre = get_artist_genre(person, dataset_genres, get_client())
-        genre = dataset_mapping(raw_genre, dataset_genres)
+    def get_from_artist(artists):
+        if not artists:
+            return None
+        
+        genres = []
+        for artist in artists:
+            raw_genre = get_artist_genre(artist, dataset_genres, spotify=get_client())
+            if raw_genre:
+                artist_genre = dataset_mapping(raw_genre, dataset_genres)
+                
+                if artist_genre:
+                    genres.append(artist_genre)
+            
+        genre_counts = Counter(genres)
+        return genre_counts.most_common(1)[0][0] if genre_counts else None
 
-        if genre:
-            genres.append(genre)
+    genre = get_from_artist([artist_name])
+    if not genre:
+        genre = get_from_artist(extract_person_from_video_data(video_data))
 
-    genre_counts = Counter(genres)
-    artist_genre = genre_counts.most_common(1)[0][0] if genre_counts else None
+    genre_df = pd.DataFrame() 
 
-    df = pd.DataFrame({'genre': [artist_genre]})
-    
+    print("\tGenre: ", genre)
+
     # encoding
-    for genre in dataset_genres:
-        df[f'genre_{genre}'] = df['genre'].apply(lambda g: 1 if g == genre else 0)
+    genre_encoding = {f'genre_{g}': [1 if g == genre else 0] for g in dataset_genres}
+    genre_df = pd.DataFrame(genre_encoding)
 
-    df.drop('genre', axis=1, inplace=True)
-
-    return df
+    return genre_df
