@@ -461,3 +461,4 @@ TODO.md
 spark/reccomendation_system/separated_tracks/
 spark/reccomendation_system/SONG_DATASET.csv
 TESTING/
+start.sh

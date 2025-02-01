@@ -51,17 +51,3 @@ docker compose up --build
 2. Follow the [Grafana README](./grafana/README.md) to setup the dashboard
 
 3. Open `web-page/index.html` to access the web interface, where you’ll be guided on how to proceed with the pipeline.
-
-# Debuggin
-During the creation of the project, several README files with useful debugging commands were included. These files contain instructions and commands to help troubleshoot and debug various components of the pipeline.
-
-Here are the links to all the README files:
-- [Fluentd](./fluentd/README.md)
-- [Kafka](./kafka/README.md)
-- [Spark](./spark/README.md)
-- [Hdfs](./hdfs/README.md)
-- [Spleeter](./spleeter/README.md)
-- [Chords_Scraper](./chords_scraper/README.md)
-- [Logstash](./logstash/README.md)
-- [Elasticsearch](./elasticsearch/README.md)
-- [Grafana](./grafana/README.md)
