@@ -1,36 +1,18 @@
 # kCHORDS
-It's a data streaming pipeline that takes a YouTube video link and an Ultimate Guitar tabs link as input, and then performs the following operations:
+Tired of juggling multiple windows just to play along with a song?
 
-1. Scraping [Ultimate Guitar Tabs](https://www.ultimate-guitar.com/)
+With kCHORDS, simply provide:
+- link of the [chords](https://www.ultimate-guitar.com/)
+- link of the [song](https://www.youtube.com/) you want to play
 
-Extracts the chords and metrics related to the tab
+and let us do the rest!
 
-2. Stem separation
+kCHORDS will automatically separates the audio into distinct tracks—vocals (bass, piano, drums, and other instruments) and presents everything in a single, seamless interface.
 
-Split the audio track of the video in 5 stems:
-- Vocals 🎤
-- Bass 🎸
-- Piano 🎹
-- Drums 🥁
-- Other 🎼
+But that’s not all! Not sure what to play next? kCHORDS features a content-based recommendation system that suggests songs based on the characteristics of the one you just played.
 
-3. Recommendation System
-
-based on the song features the content-based system will recommend 5 song to play next
-
-# Architecture
-![alt text](pipeline.jpg)
-
-It is made by the following containers:
-- **Fluentd**: receives the YouTube & Ultimate Guitar links, adds a timestamp and unique ID, and sends them to Kafka.
-- **Kafka**: Uses topics to queue data for Spark processing.
-- **Spark**: Orchestrates data extraction, audio separation, and storage.
-- **Hdfs**: Stores both the raw audio and processed stems for further analysis.
-- **Spleeter**: Separate the audio file into 5 stems
-- **Chords_Scraper**: Scrapes and structures guitar tabs from Ultimate Guitar Tabs
-- **Logstash**: Ingests processed song data from Kafka topic "songs" into Elasticsearch.
-- **Elasticsearch**: Stores and indexes song metadata, extracted tabs, and separated audio tracks.
-- **Grafana**: Visualizes everything in an interactive dashboard.
+Stop wasting time setting up...find your place in the
+sound 🎸🥁🎹
 
 # Running commands
 0. To run the project you will need youtube and spotify API TOKENS:
@@ -51,3 +33,17 @@ docker compose up --build
 2. Follow the [Grafana README](./grafana/README.md) to setup the dashboard
 
 3. Open `web-page/index.html` to access the web interface, where you’ll be guided on how to proceed with the pipeline.
+
+# Architecture
+![alt text](pipeline.jpg)
+
+It is made by the following containers:
+- **Fluentd**: receives the YouTube & Ultimate Guitar links, adds a timestamp and unique ID, and sends them to Kafka.
+- **Kafka**: Uses topics to queue data for Spark processing.
+- **Spark**: Orchestrates data extraction, audio separation, and storage.
+- **Hdfs**: Stores both the raw audio and processed stems for further analysis.
+- **Spleeter**: Separate the audio file into 5 stems
+- **Chords_Scraper**: Scrapes and structures guitar tabs from Ultimate Guitar Tabs
+- **Logstash**: Ingests processed song data from Kafka topic "songs" into Elasticsearch.
+- **Elasticsearch**: Stores and indexes song metadata, extracted tabs, and separated audio tracks.
+- **Grafana**: Visualizes everything in an interactive dashboard.
