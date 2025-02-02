@@ -1,5 +1,11 @@
 # kCHORDS
 
+
+https://github.com/user-attachments/assets/6ff5e78c-425d-4eb6-8779-f4d3fbe3d3c1
+
+
+
+
 Tired of juggling multiple windows just to play along with a song?
 
 With kCHORDS, simply provide:
