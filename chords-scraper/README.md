@@ -1,6 +1,3 @@
----
-number headings: auto, first-level 1, max 6, 1.1
----
 # 1 Ultimate Guitar Tabs Scraper
 scrapes the following info from [ultimate guitar tabs](https://www.ultimate-guitar.com):
 ```json
