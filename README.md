@@ -1,15 +1,15 @@
 # kCHORDS
+<video controls src="demo.mp4" title="Title"></video>
+
 Tired of juggling multiple windows just to play along with a song?
 
 With kCHORDS, simply provide:
 - link of the [chords](https://www.ultimate-guitar.com/)
 - link of the [song](https://www.youtube.com/) you want to play
 
-and let us do the rest!
-
 kCHORDS will automatically separates the audio into distinct tracks—vocals (bass, piano, drums, and other instruments) and presents everything in a single, seamless interface.
 
-But that’s not all! Not sure what to play next? kCHORDS features a content-based recommendation system that suggests songs based on the characteristics of the one you just played.
+But that’s not all! featuring a content-based recommendation system that suggests songs based on the characteristics of the one you just played.
 
 Stop wasting time setting up...find your place in the
 sound 🎸🥁🎹
