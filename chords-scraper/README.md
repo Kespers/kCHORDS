@@ -1,4 +1,4 @@
-# 1 Ultimate Guitar Tabs Scraper
+# Ultimate Guitar Tabs Scraper
 scrapes the following info from [ultimate guitar tabs](https://www.ultimate-guitar.com):
 ```json
 {
@@ -47,8 +47,8 @@ scrapes the following info from [ultimate guitar tabs](https://www.ultimate-guit
 
 ```
 
-## 1.1 Debug
-### 1.1.1 Server Flask
+# 1 Debug
+## 1.1 Server Flask
 avviare il server:
 ```
 docker build -t chords-scraper .
@@ -67,8 +67,8 @@ se avviato con compose:
 curl -X GET "http://localhost:6000/scrape?link=https://tabs.ultimate-guitar.com/tab/alessandro-mannarino/l-impero-chords-1760023"
 ```
 
-### 1.1.2 Scraper
-#### 1.1.2.1 installazione
+## 1.2 Scraper
+### 1.2.1 installazione
 ```
 python -m venv venv
 cd venv
@@ -81,18 +81,18 @@ playwright install
 python tester.py > test.json
 ```
 
-### 1.1.3 Scaricamento Link Canzoni
-#### 1.1.3.1 Dataset link
+## 1.2.2 Scaricamento Link Canzoni
+### 1.2.2.1 Dataset link
 costruzione dataset dei link:
 ```
 python get_links.py  > links.json
 ```
 
-### 1.1.4 Avvio Playwright UI
+## 1.2.3 Avvio Playwright UI
 per testare i selettori avviare l'env ed eseguire:
 ```
 python -m playwright codegen https://www.ultimate-guitar.com
 ```
 
 
-### 1.1.5 [bug fix gnome dipendenze](https://github.com/microsoft/playwright/issues/2621#issuecomment-2083083392)
+## 1.2.4 [bug fix gnome dipendenze](https://github.com/microsoft/playwright/issues/2621#issuecomment-2083083392)
