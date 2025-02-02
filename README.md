@@ -1,5 +1,4 @@
 # kCHORDS
-<video controls src="demo.mp4" title="Title"></video>
 
 Tired of juggling multiple windows just to play along with a song?
 
